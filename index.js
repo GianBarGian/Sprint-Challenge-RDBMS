@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
+const projects = require('./routes/projects/projects');
 const err = require('./middlewares/errors/errors');
 
 const app = express();
@@ -8,9 +9,7 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-app.get('/api', (req, res, next) => {
-    res.json({message: 'yo'})
-})
+app.use(projects);
 
 app.use(err.defaultError);
 
