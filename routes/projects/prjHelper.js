@@ -25,7 +25,7 @@ const getActByPrjId = id => {
 
 const insert = project => {
     return db('projects')
-        .insert(project, ['id'])
+        .insert(project)
 }
 
 module.exports = {

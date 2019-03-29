@@ -21,12 +21,17 @@ projects.get('/api/projects/:id', async (req, res, next) => {
     try{
         let project = await prjHlp.getPrjById(id);
         const actions = await prjHlp.getActByPrjId(id);
-        project = {
-            ...project,
-            actions: actions,
+        if (project) {
+            project = {
+                ...project,
+                actions: actions,
+            }
+            project = mappers.projectToBody(project);
+            res.json(project)
+        } else {
+            next(err.error404)
         }
-        project = mappers.projectToBody(project);
-        res.json(project)
+        
     } catch  {
         next(err.error500);
     }
